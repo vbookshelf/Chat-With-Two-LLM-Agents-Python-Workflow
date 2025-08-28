@@ -21,7 +21,7 @@ There is also a chat history for each agent. Note that the OpenAi prompt format 
 Master chat history example:
 
 ```
-master_chat_history = [{'speaker': 'User', 'message': 'Hello everone.'}, 
+master_chat_history = [{'speaker': 'User', 'message': 'Hello everyone.'}, 
                 {'speaker': 'Emma', 'message': 'Hi. My name is Emma.'},
                 {'speaker': 'Liam', 'message': 'Hello all. My name is Liam.}]
                 
