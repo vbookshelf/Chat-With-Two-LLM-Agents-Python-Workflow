@@ -10,57 +10,30 @@ In this example a user is chatting with two AI experts in a panel discussion. Th
 ## Environment and Hardware
 The code is set up to run locally, in a Jupyter notebook, using the gemma3:12b model from Ollama. I used a M4 Macbook Air, 16GB RAM. I also used the Ollama Python package.
 
-## Sample Chat
-
-```
----USER---
-User:  Hi everyone. Welcome to the discussion. Its a pleasure to have you here.
----ROUTER AGENT---
-Route to...
-Name: User
----USER---
-User:  Can you please tell us a bit about your background
----ROUTER AGENT---
-Route to...
-Name: Emma
-agent_id: agent1
----CHAT AGENT---
-(Smiling warmly) "Thank you for having me. It's lovely to be here. My name is Emma, and I'm a psychologist.
-I've dedicated my career to understanding and supporting mental health and well-being.
-I work with individuals to navigate challenges, build resilience, and cultivate a greater sense of self-understanding.
-I believe deeply in the power of empathy and connection, and I strive to create a safe and supportive space
-for people to explore their thoughts and feelings.
-I'm particularly interested in how technology impacts our relationships and emotional lives,
-which is why I'm so intrigued by this discussion about virtual girlfriends."
----ROUTER AGENT---
-Route to...
-Name: Liam
-agent_id: agent2
----CHAT AGENT---
-(Adjusting my spectacles and with a twinkle in my eye) "The pleasure's all mine! Liam's the name,
-and historical context is my game. It's fascinating to be here discussing virtual girlfriends – a topic that, frankly,
-feels ripped from the pages of a particularly outlandish science fiction novel.
-But as a historian, I'm trained to see patterns, and let me tell you, this isn't entirely new territory. 
-
-We've been seeking companionship and connection through artificial means for centuries!
-Think about the elaborate automata of the 18th century – mechanical dolls designed to mimic human interaction.
-They were status symbols, yes, but also, I suspect, a yearning for something *more* than what was readily available.
-Or consider the rise of fan fiction, which has been a vibrant, if often overlooked, cultural phenomenon for decades.
-People creating their own idealized companions within established narratives – a digital courtship, if you will. 
-
-History has a funny way of repeating itself, much like the desire for connection finds new and increasingly
-inventive outlets.
-It’s just that now, instead of clockwork mechanisms or imagined characters, we have sophisticated AI.
-The core human need remains the same, doesn't it? It’s just the delivery method that’s undergone a
-rather dramatic upgrade."
----ROUTER AGENT---
-Route to...
-Name: User
-```
-
 ## How does this work?
 
-The key to making this group chat work is to maintain a master_chat_history. This is just a list of who spoke and what they said. This master_chat_history is passed to an agent when it is prompted. The agent is then able to output a response to the last message in the master_chat_history.
+The key to making this group chat work is to maintain a master_chat_history. This is just a list of who spoke and what they said. This master_chat_history is passed to an agent when it is prompted. The agent is then able to output a response to the last message in the master_chat_history. 
+
+There is also a separate chat history for each agent.
+
+### Master chat history example
+
+```
+master_chat_history = [{'speaker': 'User', 'message': 'Hello everone.'}, 
+                {'speaker': 'Emma', 'message': 'Hi. My name is Emma.'},
+                {'speaker': 'Liam', 'message': 'Hello all. My name is Liam.}]
+                
+```
+### This is how the agent prompt is constructed
+
+```
+# Format the content
+content = {"chat_history": <master-chat-history>, "message": <last-message-in-master-chat-histor>}
+content = str(content)
+
+# Format the prompt
+prompt = {"role": "user", "content": content}
+```
 <br>
 
 ## System Messages
@@ -163,5 +136,53 @@ Your response:
 }}
 
 """
+```
+
+## Sample Chat
+
+```
+---USER---
+User:  Hi everyone. Welcome to the discussion. Its a pleasure to have you here.
+---ROUTER AGENT---
+Route to...
+Name: User
+---USER---
+User:  Can you please tell us a bit about your background
+---ROUTER AGENT---
+Route to...
+Name: Emma
+agent_id: agent1
+---CHAT AGENT---
+(Smiling warmly) "Thank you for having me. It's lovely to be here. My name is Emma, and I'm a psychologist.
+I've dedicated my career to understanding and supporting mental health and well-being.
+I work with individuals to navigate challenges, build resilience, and cultivate a greater sense of self-understanding.
+I believe deeply in the power of empathy and connection, and I strive to create a safe and supportive space
+for people to explore their thoughts and feelings.
+I'm particularly interested in how technology impacts our relationships and emotional lives,
+which is why I'm so intrigued by this discussion about virtual girlfriends."
+---ROUTER AGENT---
+Route to...
+Name: Liam
+agent_id: agent2
+---CHAT AGENT---
+(Adjusting my spectacles and with a twinkle in my eye) "The pleasure's all mine! Liam's the name,
+and historical context is my game. It's fascinating to be here discussing virtual girlfriends – a topic that, frankly,
+feels ripped from the pages of a particularly outlandish science fiction novel.
+But as a historian, I'm trained to see patterns, and let me tell you, this isn't entirely new territory. 
+
+We've been seeking companionship and connection through artificial means for centuries!
+Think about the elaborate automata of the 18th century – mechanical dolls designed to mimic human interaction.
+They were status symbols, yes, but also, I suspect, a yearning for something *more* than what was readily available.
+Or consider the rise of fan fiction, which has been a vibrant, if often overlooked, cultural phenomenon for decades.
+People creating their own idealized companions within established narratives – a digital courtship, if you will. 
+
+History has a funny way of repeating itself, much like the desire for connection finds new and increasingly
+inventive outlets.
+It’s just that now, instead of clockwork mechanisms or imagined characters, we have sophisticated AI.
+The core human need remains the same, doesn't it? It’s just the delivery method that’s undergone a
+rather dramatic upgrade."
+---ROUTER AGENT---
+Route to...
+Name: User
 ```
 
