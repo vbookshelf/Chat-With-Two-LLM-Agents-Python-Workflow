@@ -197,3 +197,4 @@ Name: User
 
 ## Notes
 - In the attached example notebook you will see that everthing works well, but late in the chat the router fails. It outputs a summary of the chat instead of the name of the next person that should speak. I suspect that the performance of the Gemma 12b model degrades when the context becomes very large. A larger model like Gemini Flash, Llama 70b or ChatGPT may not have this problem.
+- Although this example is using a small gemma3:12b model, the quality of the responses is excellent. The responses are also reasonably fast considering that the model is running locally on a CPU.
