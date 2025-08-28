@@ -6,6 +6,8 @@ In this example a user is chatting with two AI experts in a panel discussion. Th
 <a href="https://www.youtube.com/@walterthealien">
   <img src="https://github.com/vbookshelf/Chat-With-Two-LLM-Agents-Python-Workflow/blob/main/images/panel-discussion.png" alt="Ep1 - Hello, Earth" height="300">
 </a>
+<br>
+<br>
 
 ## Environment and Hardware
 The code is set up to run locally, in a Jupyter notebook, using the gemma3:12b model from Ollama. I used a M4 Macbook Air, 16GB RAM. I also used the Ollama Python package.
@@ -14,7 +16,7 @@ The code is set up to run locally, in a Jupyter notebook, using the gemma3:12b m
 
 The key to making this group chat work is to maintain a master_chat_history. This is just a list of who spoke and what they said. This master_chat_history is passed to an agent when it is prompted. The agent is then able to output a response to the last message in the master_chat_history. 
 
-There is also a separate chat history for each agent.
+There is also a chat history for each agent. Note that the OpenAi prompt format is being used.
 
 Master chat history example:
 
@@ -28,11 +30,15 @@ This is how the agent prompt is constructed:
 
 ```
 # Format the content
-content = {"chat_history": <master-chat-history>, "message": <last-message-in-master-chat-histor>}
+content = {"chat_history": <master-chat-history>, "message": <last-message-in-master-chat-history>}
 content = str(content)
 
-# Format the prompt
-prompt = {"role": "user", "content": content}
+# Format the prompt (OpenAi format)
+input_message = {"role": "user", "content": content}
+agent1_chat_history_list.append(input_message)
+
+# Prompt agent1
+agent1_response = model(agent1_chat_history_list)
 ```
 <br>
 
