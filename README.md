@@ -16,7 +16,7 @@ The key to making this group chat work is to maintain a master_chat_history. Thi
 
 There is also a separate chat history for each agent.
 
-### Master chat history example
+Master chat history example:
 
 ```
 master_chat_history = [{'speaker': 'User', 'message': 'Hello everone.'}, 
@@ -24,7 +24,7 @@ master_chat_history = [{'speaker': 'User', 'message': 'Hello everone.'},
                 {'speaker': 'Liam', 'message': 'Hello all. My name is Liam.}]
                 
 ```
-### This is how the agent prompt is constructed
+This is how the agent prompt is constructed:
 
 ```
 # Format the content
@@ -37,7 +37,7 @@ prompt = {"role": "user", "content": content}
 <br>
 
 ## System Messages
-
+<br>
 
 ### Agent1 and Agent2 system messages
 
@@ -137,6 +137,7 @@ Your response:
 
 """
 ```
+<br>
 
 ## Sample Chat
 
