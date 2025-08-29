@@ -1,6 +1,8 @@
 # Chat With Two LLM Agents - A Python Workflow
 A simple python workflow that shows how one user can chat with two LLM agents at the same time. The agents also chat with each other. This approach is useful for gaining multiple expert perspectives on a subject. 
 
+This project also demonstrates the power of using an interdisciplinary approach to understand complex issues and historic events - blending of historical analysis (Liam) with psychological insights (Emma).
+
 In this example a user is chatting with two AI experts in a panel discussion. The topic is: The Rise of Virtual Girlfriends. One agent is a historian. The other is a psychologist. The user is the discussion moderator. After each person speaks, an LLM Router agent reviews the conversation history and decides who should speak next. The user is able to speak using a simple python input. 
 
 <a href="https://www.youtube.com/@walterthealien">
